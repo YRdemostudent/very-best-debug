@@ -36,25 +36,25 @@
     <th></th>
   </tr>
 
-  <% @venues.each do |a_venue| %>
+  <% @venues.each do | venue| %>
   <tr>
     <td>
-      <%= @a_venue.id %>
+      <%= venue.id %>
     </td>
     <td>
-      <%= @a_venue.address %>
-    </td>
-   
-    <td>
-      <%= @a_venue.name %>
+      <%= venue.address %>
     </td>
    
     <td>
-      <%= @a_venue.neighborhood %>
+      <%= venue.name %>
+    </td>
+   
+    <td>
+      <%= venue.neighborhood %>
     </td>
 
     <td>
-      <a href="/venues/<%= @a_venue.id %>">Show details</a>
+      <a href="/venues/<%= venue.id %>">Show details</a>
     </td>
   </tr>
   

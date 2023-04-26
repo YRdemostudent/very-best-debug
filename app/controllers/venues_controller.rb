@@ -16,31 +16,36 @@ class VenuesController < ApplicationController
   end
 
   def create
-    @venue = Venue.new
+    venue = Venue.new
     venue.address = params.fetch("query_address")
-    venue.name = params.fetch("name")
-    venue.neighborhood = params.fetch("neighborhood")
+    venue.name = params.fetch("query_name")
+    venue.neighborhood = params.fetch("query_neighborhood")
     venue.save
 
     redirect_to("/venues/#{venue.name}")
   end
   
   def update
-    the_id = params.fetch("venue_id")
-
-    @venue = Venue.where({ :id => the_id })
-    venue.address = params.fetch("query_address")
-    venue.name = params.fetch("Query_name")
-    venue.neighborhood = params.fetch("query_neighborhood")
-    venue.save
+    the_id = params.fetch("the_id")
+    venue = Venue.where({ :id => the_id })
+    current_venue = venue.at(0)
+    address = params.fetch("query_address")
+    name = params.fetch("query_name")
+    neighborhood = params.fetch("query_neighborhood")
     
-    redirect_to("/venues/#{venue.id}")
+    current_venue.address = address
+    current_venue.name = name 
+    current_venue.neighborhood = neighborhood
+
+    current_venue.save
+    
+    redirect_to("/venues/#{current_venue.id}")
   end
 
   def destroy
-    the_id = params.fetch("venue_id")
+    the_id = params.fetch("id_to_delete")
     matching_venues = Venue.where({ :id => the_id })
-    venue = matching_venues
+    venue = matching_venues.at(0)
     venue.destroy
 
     redirect_to("/venues")
